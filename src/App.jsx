@@ -1,17 +1,37 @@
-import { useState } from 'react'
-import './App.css'
-import Navbar from './components/Navbar'
-import ItemListContainer from './components/ItemListContainer';
+import React, { useState } from 'react';
+import Navbar from './components/Navbar';
+import ItemListContainer from './components/Items/ItemListContainer';
+import { Route, Routes } from 'react-router-dom';
+import ItemDetailsContainer from './components/Items/ItemDetailsContainer';
+import "./App.css"
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [filterBySpecies, setFilterBySpecies] = useState(null);
+  const [filterByGender, setFilterByGender] = useState(null);
+
+  const handleFilterBySpecies = (species) => {
+    setFilterBySpecies(species);
+    setFilterByGender(null);
+  };
+
+  const handleFilterByGender = (gender) => {
+    setFilterByGender(gender);
+    setFilterBySpecies(null);
+  };
 
   return (
     <>
-      <Navbar/>
-      <ItemListContainer greeting="Bienvenido a nuestra tienda online, aqui encontraras una gran cantidad de productos y servicios de calidad!" />
+      <Navbar onFilterBySpecies={handleFilterBySpecies} onFilterByGender={handleFilterByGender} />
+
+      <Routes>
+        <Route path='/' element={<ItemListContainer />} />
+        <Route path='/category/aliens' element={<ItemListContainer filterBySpecies={filterBySpecies} filterByGender={filterByGender} />} />
+        <Route path='/category/female' element={<ItemListContainer filterBySpecies={filterBySpecies} filterByGender={filterByGender} />} />
+        <Route path='/item/:id' element={<ItemDetailsContainer />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
