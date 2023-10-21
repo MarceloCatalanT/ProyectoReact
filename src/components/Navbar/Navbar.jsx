@@ -2,16 +2,8 @@ import React from 'react';
 import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ onFilterBySpecies, onFilterByGender }) => {
-  const handleFilterAliens = () => {
-    onFilterBySpecies('alien');
-  };
+const Navbar = () => {
 
-  const handleFilterWomen = () => {
-    onFilterByGender('female');
-  };
-
-  
 
   return (
     <div className='Navbar'>
@@ -20,8 +12,9 @@ const Navbar = ({ onFilterBySpecies, onFilterByGender }) => {
       </Link>
       <div className='Navbar-der'>
         <Link to="/">Inicio</Link>
-        <Link to="/category/aliens" onClick={handleFilterAliens}>Aliens</Link>
-        <Link to="/category/female" onClick={handleFilterWomen}>Personajes Femeninos</Link>        
+        <Link to="/category/vacuno" >Vacuno</Link>
+        <Link to="/category/embutidos" >Embutidos</Link>
+        <Link to="/cart">Cart</Link>        
         <Link to="/item/:id"></Link>
 
         <CartWidget />

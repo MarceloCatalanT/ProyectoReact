@@ -1,17 +1,18 @@
-import useFetch from '../Hooks/useFetch'
-import ItemDetails from '../components/Items/ItemDetails'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import ItemDetailsContainer from '../components/Details/ItemDetailsContainer';
 
-const Detalle = ( { id }) => {
-    const [character] = useFetch(`https://rickandmortyapi.com/api/character/${id}`)
-    return (
-        <>
-            {
-                character !== null &&
-                <ItemDetails character={character} />
 
-            }
-        </>
-    )
-}
+const Detalle = () => {
+  const { id } = useParams();
+
+
+
+  return (
+    <div>
+      <ItemDetailsContainer id={id} />
+    </div>
+  );
+};
 
 export default Detalle

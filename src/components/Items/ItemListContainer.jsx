@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import useFetch from '../../Hooks/useFetch';
 import Tarjeta from './Tarjeta';
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
-const ItemListContainer = ({ filterBySpecies, filterByGender }) => {
-  const [data] = useFetch('https://rickandmortyapi.com/api/character/');
-  const [filteredData, setFilteredData] = useState([]);
+const ItemListContainer = ({ selectedCategory }) => {
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (data && data.results) {
-      let filtered = data.results;
+    const db = getFirestore();
+    const itemCollection = collection(db, "items");
 
-      if (filterBySpecies === 'alien') {
-        filtered = filtered.filter((character) => character.species === 'Alien');
-      }
+    const q = selectedCategory
+      ? query(itemCollection, where("category", "==", selectedCategory))
+      : itemCollection;
 
-      if (filterByGender === 'female') {
-        filtered = filtered.filter((character) => character.gender === 'Female');
-      }
-      setFilteredData(filtered);
-    }
-  }, [data, filterBySpecies, filterByGender]);
+    getDocs(q)
+      .then((snapshot) => {
+        const allData = snapshot.docs.map((document) => ({ id: document.id, ...document.data() }));
+        setItems(allData);
+      });
+  }, [selectedCategory]);
 
   return (
     <div>
-      <h2 className='titulo-home'>Bienvenido a nuestra tienda virtual de Posters</h2>
+      <h2 className='titulo-home'>Bienvenido a nuestra tienda virtual de Carnes Premium</h2>
       <ul className="character-list">
-        {filteredData.map((character) => (
-          <Tarjeta key={character.id} character={character} />
+        {items.map((item) => (
+          <Tarjeta key={item.id} item={item} />
         ))}
       </ul>
     </div>

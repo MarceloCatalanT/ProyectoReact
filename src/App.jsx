@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import ItemListContainer from './components/Items/ItemListContainer';
 import { Route, Routes } from 'react-router-dom';
-import ItemDetailsContainer from './components/Items/ItemDetailsContainer';
+import Home from './pages/Home';
+import Cart from './pages/Cart';
 import "./App.css"
+import Navbar from './components/Navbar/Navbar';
+import ItemListContainer from './components/Items/ItemListContainer';
+import CartContextProvider from './context/cartContext/cartContext/CartContextProvider';
+import Detalle from './pages/Detalle';
+
+
 
 const App = () => {
-  const [filterBySpecies, setFilterBySpecies] = useState(null);
-  const [filterByGender, setFilterByGender] = useState(null);
-
-  const handleFilterBySpecies = (species) => {
-    setFilterBySpecies(species);
-    setFilterByGender(null);
-  };
-
-  const handleFilterByGender = (gender) => {
-    setFilterByGender(gender);
-    setFilterBySpecies(null);
-  };
 
   return (
-    <>
-      <Navbar onFilterBySpecies={handleFilterBySpecies} onFilterByGender={handleFilterByGender} />
+    <>      
+    <CartContextProvider>
+          <Navbar />
 
-      <Routes>
-        <Route path='/' element={<ItemListContainer />} />
-        <Route path='/category/aliens' element={<ItemListContainer filterBySpecies={filterBySpecies} filterByGender={filterByGender} />} />
-        <Route path='/category/female' element={<ItemListContainer filterBySpecies={filterBySpecies} filterByGender={filterByGender} />} />
-        <Route path='/item/:id' element={<ItemDetailsContainer />} />
-      </Routes>
+            <Routes>
+            <Route path='/' element={<Home/>} />
+            <Route path='/category/vacuno' element={<ItemListContainer selectedCategory='Vacuno' />} />
+            <Route path='/category/embutidos' element={<ItemListContainer selectedCategory='Embutido' />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/item/:id' element={<Detalle />} />
+            </Routes>
+
+      </CartContextProvider>
+
     </>
   );
 }
