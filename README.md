@@ -18,11 +18,11 @@ Este README proporciona una visión general de la funcionalidad y estructura de 
 
 Clona el repositorio en tu máquina local:
 
-- git clone https://github.com/tunombre/tu-aplicacion-de-ecommerce.git
+- git clone https://github.com/MarceloCatalanT/ProyectoReact.git
 
 Navega al directorio del proyecto:
 
-- cd tu-aplicacion-de-ecommerce
+- cd ProyectoReact
 
 Instala las dependencias necesarias:
 
