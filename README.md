@@ -68,4 +68,4 @@ Estructura del Proyecto
 - HTML/CSS
 - JavaScript
 
-## Gracias por probar mi aplicación de e-commerce. Espero que hayas tenido una experiencia satisfactoria mientras explorabas nuestro catálogo de productos y realizabas tus compras. Si tienes alguna sugerencia o comentario no dudes en ponerte en contacto conmigo. Gracias
+Gracias por probar mi aplicación de e-commerce. Espero que hayas tenido una experiencia satisfactoria mientras explorabas nuestro catálogo de productos y realizabas tus compras. Si tienes alguna sugerencia o comentario no dudes en ponerte en contacto conmigo. Gracias
